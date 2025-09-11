@@ -1,10 +1,10 @@
-package com.dev.client_service;
+package com.dev.costumer_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ClientServiceApplicationTests {
+class CostumerServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

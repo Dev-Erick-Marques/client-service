@@ -1,4 +1,4 @@
-package com.dev.client_service.exceptions;
+package com.dev.costumer_service.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

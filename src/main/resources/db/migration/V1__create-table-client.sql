@@ -1,9 +1,0 @@
-CREATE TABLE clients(
-    id_client BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    cpf VARCHAR(11) NOT NULL,
-    nome VARCHAR NOT NULL,
-    idade INTEGER NOT NULL,
-    sexo VARCHAR(1) NOT NULL,
-     CONSTRAINT chk_sexo CHECK (sexo IN ('F','M')),
-    endereco VARCHAR NOT NULL
-);

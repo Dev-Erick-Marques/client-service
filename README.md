@@ -1,29 +1,45 @@
-# Client Service
+# Costumer Service
 
-O **Client Service** é o microsserviço responsável pelo gerenciamento de clientes da plataforma de e-commerce.  
-Ele fornece endpoints para **registro, consulta, atualização e exclusão de clientes**, servindo como base para cadastros e informações pessoais.
+The **Costumer Service** is a microservice responsible for managing platform costumers.  
+It handles costumer registration, retrieval, soft deletion, and restoration.  
+Authentication and authorization are based on JWT tokens.
 
-## Tecnologias Utilizadas
+[Read in Portuguese](README-PT.md)
+## Features
+
+- Register new costumers using `idUser` from JWT token
+- Retrieve costumer by ID
+- List all costumers
+- Soft delete costumer by ID
+- Restore soft deleted costumer by ID
+
+## Tech Stack
+
 - **Java 17+**
-- **Spring Boot 3**
+- **Spring Boot**
 - **Spring Data JPA**
-- **Spring Web**
+- **Spring Security + JWT*
+- **Consul**
+- **Flyway** (database migrations)
 - **PostgreSQL**
 
+## Endpoints
 
-## Endpoints Principais
-| Método | Endpoint            | Descrição                |
-| ------ | ------------------- | ------------------------ |
-| POST   | `/api/clients`      | Cadastrar novo cliente   |
-| GET    | `/api/clients`      | Listar todos os clientes |
-| GET    | `/api/clients/{id}` | Buscar cliente por ID    |
-| DELETE | `/api/clients/{id}` | Remover cliente          |
+### Base URL: `/costumers`
 
-## Próximos Passos
+### Available Routes
 
-- Validar CPF/CNPJ automaticamente
-- Relacionar clientes com usuários (User Service)
-- Método para atualizar clientes
-- Spring Security para validação do JWT
-- Implementação de Roles
-- Integração com outros microsserviços
+| Method | Endpoint        | Description                             | Auth Required |
+|--------|-----------------|-----------------------------------------|---------------|
+| POST   | `/register`     | Register new costumer from JWT `idUser` | ✅             |
+| GET    | `/{id}`         | Get costumer by ID                      | ✅             |
+| GET    | `/all`          | List all costumers                      | ✅             |
+| PATCH  | `/{id}/delete`  | Soft delete costumer by ID              | ✅             |
+| PATCH  | `/{id}/restore` | Restore soft deleted costumer by ID     | ✅             |
+
+## Next Steps
+
+- Automatically validate CPF/CNPJ (Brazilian taxpayer ID)
+- Method for updating clients
+- Role implementation
+- Swagger documentation
