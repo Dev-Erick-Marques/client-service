@@ -12,6 +12,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+public.pub
 
 ### IntelliJ IDEA ###
 .idea

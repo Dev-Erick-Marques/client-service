@@ -4,40 +4,40 @@ import com.dev.costumer_service.dto.CostumerDTO;
 import com.dev.costumer_service.entity.Costumer;
 import com.dev.costumer_service.exceptions.ResourceNotFoundException;
 import com.dev.costumer_service.repository.CostumerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class CostumerService {
-    @Autowired
-    private CostumerRepository repository;
 
+    private final CostumerRepository costumerRepository;
+    private final WebClient webClient;
 
     public List<Costumer> getAllCostumers(){
-        var costumers = repository.findAll();
+        var costumers = costumerRepository.findAll();
         if (costumers.isEmpty()){
             throw new ResourceNotFoundException("No costumers were found");
         }
         return costumers;
     }
-
-    public Costumer saveCostumer(CostumerDTO dto, String jwtSubject){
-
+    public Costumer saveCostumer(CostumerDTO costumerDTO, String jwtSubject){
         UUID UserId = UUID.fromString(jwtSubject);
-        return repository.save(new Costumer(dto, UserId));
+        return costumerRepository.save(new Costumer(costumerDTO, UserId));
     }
 
     public void softDeleteCostumerById(UUID id, Boolean isDeleted){
-        repository.findByCostumerId(id)
+        costumerRepository.findByCostumerId(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Costumer not found"));
-        repository.softDeleteById(id, isDeleted);
+        costumerRepository.softDeleteById(id, isDeleted);
     }
 
     public Costumer findCostumerById(UUID id){
-        return repository.findByCostumerId(id)
+        return costumerRepository.findByCostumerId(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Costumer not found"));
     }
 

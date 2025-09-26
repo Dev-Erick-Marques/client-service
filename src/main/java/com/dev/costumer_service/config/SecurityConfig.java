@@ -1,4 +1,4 @@
-package com.dev.costumer_service.security;
+package com.dev.costumer_service.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
