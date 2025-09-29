@@ -2,11 +2,11 @@ package com.dev.costumer_service.service;
 
 import com.dev.costumer_service.dto.CostumerDTO;
 import com.dev.costumer_service.entity.Costumer;
-import com.dev.costumer_service.exceptions.ResourceNotFoundException;
+import com.dev.costumer_service.exceptions.exceptions.CostumersNotFoundException;
 import com.dev.costumer_service.repository.CostumerRepository;
+import com.dev.costumer_service.service.validator.CostumerValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,12 +16,12 @@ import java.util.UUID;
 public class CostumerService {
 
     private final CostumerRepository costumerRepository;
-    private final WebClient webClient;
+    private final CostumerValidator validator;
 
     public List<Costumer> getAllCostumers(){
         var costumers = costumerRepository.findAll();
         if (costumers.isEmpty()){
-            throw new ResourceNotFoundException("No costumers were found");
+            throw new CostumersNotFoundException();
         }
         return costumers;
     }
@@ -31,14 +31,12 @@ public class CostumerService {
     }
 
     public void softDeleteCostumerById(UUID id, Boolean isDeleted){
-        costumerRepository.findByCostumerId(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Costumer not found"));
+        validator.validateCostumer(id);
         costumerRepository.softDeleteById(id, isDeleted);
     }
 
     public Costumer findCostumerById(UUID id){
-        return costumerRepository.findByCostumerId(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Costumer not found"));
+        return validator.validateCostumer(id);
     }
 
 

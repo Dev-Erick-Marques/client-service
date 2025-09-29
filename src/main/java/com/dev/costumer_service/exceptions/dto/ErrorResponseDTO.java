@@ -1,6 +1,5 @@
-package com.dev.costumer_service.exceptions;
+package com.dev.costumer_service.exceptions.dto;
 
-import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.http.HttpStatus;
 
 import java.time.Instant;

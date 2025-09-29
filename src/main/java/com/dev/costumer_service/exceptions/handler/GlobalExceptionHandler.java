@@ -1,6 +1,6 @@
 package com.dev.costumer_service.exceptions.handler;
 
-import com.dev.costumer_service.exceptions.ErrorResponseDTO;
+import com.dev.costumer_service.exceptions.dto.ErrorResponseDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
